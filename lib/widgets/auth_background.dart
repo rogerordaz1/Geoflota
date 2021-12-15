@@ -2,22 +2,56 @@ import 'package:flutter/material.dart';
 
 // ignore: use_key_in_widget_constructors
 class AuthBackground extends StatelessWidget {
+  final Widget child;
+
+  const AuthBackground({Key? key, required this.child}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
     return SizedBox(
       width: double.infinity,
       height: double.infinity,
       child: Stack(
-        children: const [
-          _PurpleBox(),
+        children: [
+          const _CajaDeColor(),
+          const _HeaderIcon(),
+          child,
         ],
       ),
     );
   }
 }
 
-class _PurpleBox extends StatelessWidget {
-  const _PurpleBox({Key? key}) : super(key: key);
+class _HeaderIcon extends StatelessWidget {
+  const _HeaderIcon({
+    Key? key,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return const SafeArea(
+      child: Padding(
+        padding: EdgeInsets.only(top: 30),
+        child: SizedBox(
+            width: double.infinity,
+            child: SizedBox(
+                height: 100,
+                width: 100,
+                child:
+
+                    //Image(image: AssetImage('assets/foto1.png'))
+                    Icon(
+                  Icons.person_pin,
+                  color: Colors.white,
+                  size: 80,
+                ))),
+      ),
+    );
+  }
+}
+
+class _CajaDeColor extends StatelessWidget {
+  const _CajaDeColor({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

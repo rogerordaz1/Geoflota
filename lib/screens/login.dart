@@ -31,8 +31,36 @@ class LoginPageState extends State<LoginPage> {
 
   @override
   Widget build(BuildContext context) {
+    final size = MediaQuery.of(context).size;
     return Scaffold(
-      body: AuthBackground(),
+      body: AuthBackground(
+        child: SingleChildScrollView(
+          child: Column(
+            children: [
+              SizedBox(
+                height: size.height * 0.30,
+              ),
+              CardContainer(
+                child: Column(
+                  children: [
+                    const SizedBox(
+                      height: 10,
+                    ),
+                    Text(
+                      'Acceder',
+                      style: Theme.of(context).textTheme.headline4,
+                    ),
+                    const SizedBox(
+                      height: 30,
+                    ),
+                    const _LoginForm()
+                  ],
+                ),
+              ),
+            ],
+          ),
+        ),
+      ),
     );
     // Scaffold(
     //   backgroundColor: Colors.blue[100],
@@ -193,5 +221,71 @@ class LoginPageState extends State<LoginPage> {
       emailcontroller.clear();
       passwordcontroller.clear();
     }
+  }
+}
+
+class _LoginForm extends StatelessWidget {
+  const _LoginForm({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      child: Form(
+          child: Column(
+        children: [
+          TextFormField(
+            keyboardType: TextInputType.emailAddress,
+            decoration: const InputDecoration(
+                enabledBorder: UnderlineInputBorder(
+                    borderSide: BorderSide(color: Colors.deepPurple)),
+                focusedBorder: UnderlineInputBorder(
+                    borderSide: BorderSide(color: Colors.deepPurple, width: 2)),
+                hintText: 'jhon.doe@gmail.com',
+                labelText: 'Correo',
+                labelStyle: TextStyle(color: Colors.grey),
+                prefixIcon: Icon(
+                  Icons.alternate_email_sharp,
+                  color: Colors.deepPurple,
+                )),
+          ),
+          const SizedBox(
+            height: 20,
+          ),
+          TextFormField(
+            obscureText: true,
+            keyboardType: TextInputType.emailAddress,
+            decoration: const InputDecoration(
+                enabledBorder: UnderlineInputBorder(
+                    borderSide: BorderSide(color: Colors.deepPurple)),
+                focusedBorder: UnderlineInputBorder(
+                    borderSide: BorderSide(color: Colors.deepPurple, width: 2)),
+                hintText: '******',
+                labelText: 'Contraseña',
+                labelStyle: TextStyle(color: Colors.grey),
+                prefixIcon: Icon(
+                  Icons.lock_outline,
+                  color: Colors.deepPurple,
+                )),
+          ),
+          const SizedBox(
+            height: 20,
+          ),
+          MaterialButton(
+              shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(10)),
+              disabledColor: Colors.grey,
+              elevation: 0,
+              color: Colors.deepPurple,
+              child: Container(
+                  padding:
+                      const EdgeInsets.symmetric(horizontal: 80, vertical: 15),
+                  child: const Text(
+                    'Ingresar',
+                    style: TextStyle(color: Colors.white),
+                  )),
+              onPressed: () {})
+        ],
+      )),
+    );
   }
 }
