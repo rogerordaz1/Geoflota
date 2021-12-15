@@ -10,18 +10,12 @@ class LoginPage extends StatefulWidget {
 }
 
 class LoginPageState extends State<LoginPage> {
-  bool _isHidden = true;
+  bool isHidden = true;
   bool controlcmail = false;
   bool controlcontrsena = false;
   final emailcontroller = TextEditingController();
   final passwordcontroller = TextEditingController();
   bool respuestahttp = false;
-
-  void toggleVisibility() {
-    setState(() {
-      _isHidden = !_isHidden;
-    });
-  }
 
   void dispose() {
     emailcontroller.dispose();
@@ -47,7 +41,7 @@ class LoginPageState extends State<LoginPage> {
                       height: 10,
                     ),
                     Text(
-                      'Acceder',
+                      'Login ',
                       style: Theme.of(context).textTheme.headline4,
                     ),
                     const SizedBox(
@@ -169,22 +163,17 @@ class LoginPageState extends State<LoginPage> {
       child: TextFormField(
           controller: passwordcontroller,
           decoration: InputDecoration(
-              border: OutlineInputBorder(
-                borderRadius: BorderRadius.circular(5),
-              ),
-              hintText: "*******",
-              hintStyle: const TextStyle(
-                color: Colors.grey,
-                fontSize: 16.0,
-              ),
-              prefixIcon: const Icon(Icons.lock),
-              suffixIcon: IconButton(
-                onPressed: toggleVisibility,
-                icon: _isHidden
-                    ? const Icon(Icons.visibility_off)
-                    : const Icon(Icons.visibility),
-              )),
-          obscureText: _isHidden,
+            border: OutlineInputBorder(
+              borderRadius: BorderRadius.circular(5),
+            ),
+            hintText: "*******",
+            hintStyle: const TextStyle(
+              color: Colors.grey,
+              fontSize: 16.0,
+            ),
+            prefixIcon: const Icon(Icons.lock),
+          ),
+          obscureText: isHidden,
           validator: (value) {
             if ((value != null && value.length > 5)) {
               controlcontrsena = true;
@@ -223,8 +212,23 @@ class LoginPageState extends State<LoginPage> {
   }
 }
 
-class _LoginForm extends StatelessWidget {
-  const _LoginForm({Key? key}) : super(key: key);
+class _LoginForm extends StatefulWidget {
+  const _LoginForm({
+    Key? key,
+  }) : super(key: key);
+
+  @override
+  State<_LoginForm> createState() => _LoginFormState();
+}
+
+class _LoginFormState extends State<_LoginForm> {
+  bool isHidden = true;
+
+  void toggleVisibility() {
+    setState(() {
+      isHidden = !isHidden;
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -246,18 +250,17 @@ class _LoginForm extends StatelessWidget {
                   contentPadding:
                       EdgeInsets.symmetric(horizontal: 8, vertical: 12),
                   border: OutlineInputBorder(
-                      borderSide: BorderSide(color: Colors.deepPurple)),
+                      borderSide: BorderSide(color: Colors.blue)),
                   enabledBorder: OutlineInputBorder(
-                      borderSide: BorderSide(color: Colors.deepPurple)),
+                      borderSide: BorderSide(color: Colors.blue)),
                   focusedBorder: OutlineInputBorder(
-                      borderSide:
-                          BorderSide(color: Colors.deepPurple, width: 2)),
+                      borderSide: BorderSide(color: Colors.blue, width: 2)),
                   hintText: 'jhon.doe@gmail.com',
                   labelText: 'Correo',
                   labelStyle: TextStyle(color: Colors.grey),
                   prefixIcon: Icon(
                     Icons.alternate_email_sharp,
-                    color: Colors.deepPurple,
+                    color: Colors.blue,
                   )),
             ),
             const SizedBox(
@@ -273,25 +276,30 @@ class _LoginForm extends StatelessWidget {
                   return "La contrasena debe tener 6 caracteres";
                 }
               },
-              obscureText: true,
               keyboardType: TextInputType.emailAddress,
-              decoration: const InputDecoration(
+              decoration: InputDecoration(
                   contentPadding:
-                      EdgeInsets.symmetric(horizontal: 8, vertical: 12),
-                  border: OutlineInputBorder(
-                      borderSide: BorderSide(color: Colors.deepPurple)),
-                  enabledBorder: OutlineInputBorder(
-                      borderSide: BorderSide(color: Colors.deepPurple)),
-                  focusedBorder: OutlineInputBorder(
-                      borderSide:
-                          BorderSide(color: Colors.deepPurple, width: 2)),
+                      const EdgeInsets.symmetric(horizontal: 8, vertical: 12),
+                  border: const OutlineInputBorder(
+                      borderSide: BorderSide(color: Colors.blue)),
+                  enabledBorder: const OutlineInputBorder(
+                      borderSide: BorderSide(color: Colors.blue)),
+                  focusedBorder: const OutlineInputBorder(
+                      borderSide: BorderSide(color: Colors.blue, width: 2)),
                   hintText: '******',
                   labelText: 'Contraseña',
-                  labelStyle: TextStyle(color: Colors.grey),
-                  prefixIcon: Icon(
+                  labelStyle: const TextStyle(color: Colors.grey),
+                  prefixIcon: const Icon(
                     Icons.lock_outline,
-                    color: Colors.deepPurple,
+                    color: Colors.blue,
+                  ),
+                  suffixIcon: IconButton(
+                    onPressed: toggleVisibility,
+                    icon: isHidden
+                        ? const Icon(Icons.visibility_off)
+                        : const Icon(Icons.visibility),
                   )),
+              obscureText: isHidden,
             ),
             const SizedBox(
               height: 20,
@@ -301,7 +309,7 @@ class _LoginForm extends StatelessWidget {
                     borderRadius: BorderRadius.circular(10)),
                 disabledColor: Colors.grey,
                 elevation: 0,
-                color: Colors.deepPurple,
+                color: Colors.blue,
                 child: Container(
                     padding: const EdgeInsets.symmetric(
                         horizontal: 80, vertical: 15),

@@ -8,7 +8,6 @@ class AuthBackground extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final size = MediaQuery.of(context).size;
     return SizedBox(
       width: double.infinity,
       height: double.infinity,
@@ -26,22 +25,24 @@ class _HeaderIcon extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const SafeArea(
+    return SafeArea(
       child: Padding(
-        padding: EdgeInsets.only(top: 30),
-        child: SizedBox(
-            width: double.infinity,
-            child: SizedBox(
-                height: 100,
-                width: 100,
-                child:
-
-                    //Image(image: AssetImage('assets/foto1.png'))
-                    Icon(
-                  Icons.person_pin,
-                  color: Colors.white,
-                  size: 80,
-                ))),
+        padding: const EdgeInsets.only(top: 30),
+        child: Column(
+          children: [
+            const SizedBox(
+                width: double.infinity,
+                child: Image(
+                    image: AssetImage(
+                        'assets/260px-Logotipo-pequeño-Etecsa.png'))),
+            Text(
+              'GeoRuta',
+              style: Theme.of(context).textTheme.headline6,
+            )
+          ],
+        ),
+        //  height: 100,
+        //   width: 100,
       ),
     );
   }
@@ -56,7 +57,7 @@ class _CajaDeColor extends StatelessWidget {
 
     return Container(
       width: double.infinity,
-      height: size.height * 0.80,
+      height: size.height,
       decoration: _buildBoxDecoration(),
       // color: Colors.indigo[400],
     );
@@ -64,12 +65,9 @@ class _CajaDeColor extends StatelessWidget {
 
   BoxDecoration _buildBoxDecoration() {
     return const BoxDecoration(
-        borderRadius: BorderRadius.only(
-            bottomLeft: Radius.circular(100),
-            bottomRight: Radius.circular(100)),
         gradient: LinearGradient(colors: [
-          Color.fromRGBO(63, 63, 156, 1),
-          Color.fromRGBO(90, 70, 178, 1),
-        ]));
+      Colors.blue,
+      Colors.white,
+    ]));
   }
 }
