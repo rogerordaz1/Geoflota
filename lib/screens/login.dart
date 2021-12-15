@@ -107,7 +107,6 @@ class LoginPageState extends State<LoginPage> {
     //                   onPressed: () {
     //                     comprobar(
     //                         emailcontroller.text, passwordcontroller.text);
-
     //                     // dispose();
     //                   },
     //                   color: Colors.blue[400],
@@ -244,9 +243,13 @@ class _LoginForm extends StatelessWidget {
               },
               keyboardType: TextInputType.emailAddress,
               decoration: const InputDecoration(
-                  enabledBorder: UnderlineInputBorder(
+                  contentPadding:
+                      EdgeInsets.symmetric(horizontal: 8, vertical: 12),
+                  border: OutlineInputBorder(
                       borderSide: BorderSide(color: Colors.deepPurple)),
-                  focusedBorder: UnderlineInputBorder(
+                  enabledBorder: OutlineInputBorder(
+                      borderSide: BorderSide(color: Colors.deepPurple)),
+                  focusedBorder: OutlineInputBorder(
                       borderSide:
                           BorderSide(color: Colors.deepPurple, width: 2)),
                   hintText: 'jhon.doe@gmail.com',
@@ -273,9 +276,13 @@ class _LoginForm extends StatelessWidget {
               obscureText: true,
               keyboardType: TextInputType.emailAddress,
               decoration: const InputDecoration(
-                  enabledBorder: UnderlineInputBorder(
+                  contentPadding:
+                      EdgeInsets.symmetric(horizontal: 8, vertical: 12),
+                  border: OutlineInputBorder(
                       borderSide: BorderSide(color: Colors.deepPurple)),
-                  focusedBorder: UnderlineInputBorder(
+                  enabledBorder: OutlineInputBorder(
+                      borderSide: BorderSide(color: Colors.deepPurple)),
+                  focusedBorder: OutlineInputBorder(
                       borderSide:
                           BorderSide(color: Colors.deepPurple, width: 2)),
                   hintText: '******',
@@ -302,7 +309,10 @@ class _LoginForm extends StatelessWidget {
                       'Ingresar',
                       style: TextStyle(color: Colors.white),
                     )),
-                onPressed: () {})
+                onPressed: () {}),
+            const SizedBox(
+              height: 20,
+            ),
           ],
         ));
   }

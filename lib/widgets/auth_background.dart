@@ -8,15 +8,12 @@ class AuthBackground extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final size = MediaQuery.of(context).size;
     return SizedBox(
       width: double.infinity,
       height: double.infinity,
       child: Stack(
-        children: [
-          const _CajaDeColor(),
-          const _HeaderIcon(),
-          child,
-        ],
+        children: [const _CajaDeColor(), const _HeaderIcon(), child],
       ),
     );
   }
@@ -59,7 +56,7 @@ class _CajaDeColor extends StatelessWidget {
 
     return Container(
       width: double.infinity,
-      height: size.height * 0.40,
+      height: size.height * 0.80,
       decoration: _buildBoxDecoration(),
       // color: Colors.indigo[400],
     );
@@ -67,9 +64,12 @@ class _CajaDeColor extends StatelessWidget {
 
   BoxDecoration _buildBoxDecoration() {
     return const BoxDecoration(
+        borderRadius: BorderRadius.only(
+            bottomLeft: Radius.circular(100),
+            bottomRight: Radius.circular(100)),
         gradient: LinearGradient(colors: [
-      Color.fromRGBO(63, 63, 156, 1),
-      Color.fromRGBO(90, 70, 178, 1),
-    ]));
+          Color.fromRGBO(63, 63, 156, 1),
+          Color.fromRGBO(90, 70, 178, 1),
+        ]));
   }
 }
