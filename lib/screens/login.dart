@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
+import 'package:localizacionversion2/providers/login_form_provider.dart';
 import 'package:localizacionversion2/widgets/widgets.dart';
+import 'package:provider/provider.dart';
 
 class LoginPage extends StatefulWidget {
   const LoginPage({Key? key}) : super(key: key);
@@ -47,7 +49,10 @@ class LoginPageState extends State<LoginPage> {
                     const SizedBox(
                       height: 30,
                     ),
-                    const _LoginForm()
+                    ChangeNotifierProvider(
+                      create: (_) => LoginFormProvider(),
+                      child: const _LoginForm(),
+                    )
                   ],
                 ),
               ),
@@ -232,11 +237,15 @@ class _LoginFormState extends State<_LoginForm> {
 
   @override
   Widget build(BuildContext context) {
+    final loginForm = Provider.of<LoginFormProvider>(context);
+
     return Form(
+        key: loginForm.formKey,
         autovalidateMode: AutovalidateMode.onUserInteraction,
         child: Column(
           children: [
             TextFormField(
+              onChanged: (value) => loginForm.email = value,
               validator: (value) {
                 String pattern =
                     r'^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$';
@@ -267,6 +276,7 @@ class _LoginFormState extends State<_LoginForm> {
               height: 20,
             ),
             TextFormField(
+              onChanged: (value) => loginForm.password = value,
               validator: (value) {
                 if ((value != null && value.length > 5)) {
                   // controlcontrsena = true;
@@ -317,7 +327,11 @@ class _LoginFormState extends State<_LoginForm> {
                       'Ingresar',
                       style: TextStyle(color: Colors.white),
                     )),
-                onPressed: () {}),
+                onPressed: () {
+                  if (!loginForm.isValidForm()) return;
+
+                  Navigator.pushReplacementNamed(context, 'home');
+                }),
             const SizedBox(
               height: 20,
             ),
