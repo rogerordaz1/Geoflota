@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:localizacionversion2/screens/home.dart';
-import 'package:localizacionversion2/screens/login.dart';
+
+import 'package:localizacionversion2/screens/sceens.dart';
 
 void main() => runApp(const MyApp());
 
