@@ -17,6 +17,8 @@ class MyApp extends StatelessWidget {
         'login': (BuildContext context) => const LoginPage(),
         'home': (BuildContext context) => const HomePage(),
       },
+      theme:
+          ThemeData.light().copyWith(scaffoldBackgroundColor: Colors.grey[300]),
     );
   }
 }

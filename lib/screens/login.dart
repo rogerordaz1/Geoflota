@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
+import 'package:localizacionversion2/widgets/widgets.dart';
 
 class LoginPage extends StatefulWidget {
   const LoginPage({Key? key}) : super(key: key);
@@ -31,71 +32,74 @@ class LoginPageState extends State<LoginPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.blue[100],
-      body: Stack(
-        children: [
-          Container(
-            padding: const EdgeInsets.only(top: 125, left: 25, right: 25),
-            child: Container(
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(5),
-                color: const Color.fromRGBO(255, 255, 255, 0.6),
-              ),
-              padding: const EdgeInsets.only(top: 100, left: 10, right: 10),
-              height: MediaQuery.of(context).size.height * 0.6,
-              width: MediaQuery.of(context).size.width,
-              child: SingleChildScrollView(
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    const Text(
-                      'Correo electrónico',
-                    ),
-                    const SizedBox(
-                      height: 5,
-                    ),
-                    campoemail(),
-                    const SizedBox(
-                      height: 40,
-                    ),
-                    const Text(
-                      'Contraseña',
-                    ),
-                    const SizedBox(
-                      height: 5,
-                    ),
-                    campocontrasena(),
-                    const SizedBox(
-                      height: 40,
-                    ),
-                    MaterialButton(
-                      child: const Text('Continuar'),
-                      minWidth: MediaQuery.of(context).size.width,
-                      height: 40,
-                      onPressed: () {
-                        comprobar(
-                            emailcontroller.text, passwordcontroller.text);
-
-                        // dispose();
-                      },
-                      color: Colors.blue[400],
-                    )
-                  ],
-                ),
-              ),
-            ),
-          ),
-          Container(
-            child: logo(),
-            padding: EdgeInsets.only(
-              top: 80,
-              left: MediaQuery.of(context).size.width * 0.35,
-              right: MediaQuery.of(context).size.width * 0.35,
-            ),
-          ),
-        ],
-      ),
+      body: AuthBackground(),
     );
+    // Scaffold(
+    //   backgroundColor: Colors.blue[100],
+    //   body: Stack(
+    //     children: [
+    //       Container(
+    //         padding: const EdgeInsets.only(top: 125, left: 25, right: 25),
+    //         child: Container(
+    //           decoration: BoxDecoration(
+    //             borderRadius: BorderRadius.circular(5),
+    //             color: const Color.fromRGBO(255, 255, 255, 0.6),
+    //           ),
+    //           padding: const EdgeInsets.only(top: 100, left: 10, right: 10),
+    //           height: MediaQuery.of(context).size.height * 0.6,
+    //           width: MediaQuery.of(context).size.width,
+    //           child: SingleChildScrollView(
+    //             child: Column(
+    //               crossAxisAlignment: CrossAxisAlignment.start,
+    //               children: [
+    //                 const Text(
+    //                   'Correo electrónico',
+    //                 ),
+    //                 const SizedBox(
+    //                   height: 5,
+    //                 ),
+    //                 campoemail(),
+    //                 const SizedBox(
+    //                   height: 40,
+    //                 ),
+    //                 const Text(
+    //                   'Contraseña',
+    //                 ),
+    //                 const SizedBox(
+    //                   height: 5,
+    //                 ),
+    //                 campocontrasena(),
+    //                 const SizedBox(
+    //                   height: 40,
+    //                 ),
+    //                 MaterialButton(
+    //                   child: const Text('Continuar'),
+    //                   minWidth: MediaQuery.of(context).size.width,
+    //                   height: 40,
+    //                   onPressed: () {
+    //                     comprobar(
+    //                         emailcontroller.text, passwordcontroller.text);
+
+    //                     // dispose();
+    //                   },
+    //                   color: Colors.blue[400],
+    //                 )
+    //               ],
+    //             ),
+    //           ),
+    //         ),
+    //       ),
+    //       Container(
+    //         child: logo(),
+    //         padding: EdgeInsets.only(
+    //           top: 80,
+    //           left: MediaQuery.of(context).size.width * 0.35,
+    //           right: MediaQuery.of(context).size.width * 0.35,
+    //         ),
+    //       ),
+    //     ],
+    //   ),
+    // );
   }
 
   campoemail() {
