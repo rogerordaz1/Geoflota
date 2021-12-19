@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:localizacionversion2/screens/check_auth_screen.dart';
 
 import 'package:localizacionversion2/screens/sceens.dart';
 import 'package:localizacionversion2/services/auth_service.dart';
@@ -24,10 +25,11 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: "GeoRuta",
       debugShowCheckedModeBanner: false,
-      initialRoute: 'login',
+      initialRoute: 'checking',
       routes: {
         'login': (BuildContext context) => const LoginPage(),
         'home': (BuildContext context) => const HomePage(),
+        'checking': (_) => const CheckAuthScreen(),
       },
       theme:
           ThemeData.light().copyWith(scaffoldBackgroundColor: Colors.grey[300]),
