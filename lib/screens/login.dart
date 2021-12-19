@@ -191,12 +191,15 @@ class _LoginFormState extends State<_LoginForm> {
                   final authService =
                       Provider.of<AuthService>(context, listen: false);
 
-                  if (!loginForm.isValidForm()) return;
-
-                  final String? token = await authService.loginUser(
-                      loginForm.email, loginForm.password);
-
-                  Navigator.pushReplacementNamed(context, 'home');
+                  if (!loginForm.isValidForm()) {
+                    return;
+                  } else {
+                    final String? token = await authService.loginUser(
+                        loginForm.email, loginForm.password);
+                    if (authService.navegar == true) {
+                      Navigator.pushReplacementNamed(context, 'home');
+                    } else {}
+                  }
                 }),
             const SizedBox(
               height: 20,
