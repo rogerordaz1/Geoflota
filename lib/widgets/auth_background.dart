@@ -27,7 +27,7 @@ class _HeaderIcon extends StatelessWidget {
   Widget build(BuildContext context) {
     return SafeArea(
       child: Padding(
-        padding: const EdgeInsets.only(top: 30),
+        padding: const EdgeInsets.only(top: 1),
         child: Column(
           children: [
             const SizedBox(

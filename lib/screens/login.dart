@@ -197,12 +197,12 @@ class _LoginFormState extends State<_LoginForm> {
                   } else {
                     final String? errorMesage = await authService.loginUser(
                         loginForm.email, loginForm.password);
-                    if (errorMesage == null) {
+                    if (!(errorMesage == null)) {
+                      FocusScope.of(context).unfocus();
+                      NotificationService.ShowSnackBar(errorMesage);
                     } else {
                       if (authService.navegar == true) {
                         Navigator.pushReplacementNamed(context, 'home');
-                      } else {
-                        NotificationService.ShowSnackBar(errorMesage);
                       }
                     }
                   }
