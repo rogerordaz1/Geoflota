@@ -3,6 +3,7 @@ import 'package:localizacionversion2/screens/check_auth_screen.dart';
 
 import 'package:localizacionversion2/screens/sceens.dart';
 import 'package:localizacionversion2/services/auth_service.dart';
+import 'package:localizacionversion2/services/service.dart';
 import 'package:provider/provider.dart';
 
 void main() => runApp(const AppState());
@@ -31,6 +32,7 @@ class MyApp extends StatelessWidget {
         'home': (BuildContext context) => const HomePage(),
         'checking': (_) => const CheckAuthScreen(),
       },
+      scaffoldMessengerKey: NotificationService.messengerKey,
       theme:
           ThemeData.light().copyWith(scaffoldBackgroundColor: Colors.grey[300]),
     );

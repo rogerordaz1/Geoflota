@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:localizacionversion2/providers/login_form_provider.dart';
 import 'package:localizacionversion2/services/auth_service.dart';
+import 'package:localizacionversion2/services/service.dart';
 import 'package:localizacionversion2/widgets/widgets.dart';
 import 'package:provider/provider.dart';
 
@@ -194,11 +195,16 @@ class _LoginFormState extends State<_LoginForm> {
                   if (!loginForm.isValidForm()) {
                     return;
                   } else {
-                    final String? token = await authService.loginUser(
+                    final String? errorMesage = await authService.loginUser(
                         loginForm.email, loginForm.password);
-                    if (authService.navegar == true) {
-                      Navigator.pushReplacementNamed(context, 'home');
-                    } else {}
+                    if (errorMesage == null) {
+                    } else {
+                      if (authService.navegar == true) {
+                        Navigator.pushReplacementNamed(context, 'home');
+                      } else {
+                        NotificationService.ShowSnackBar(errorMesage);
+                      }
+                    }
                   }
                 }),
             const SizedBox(
