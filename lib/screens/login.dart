@@ -192,6 +192,7 @@ class _LoginFormState extends State<_LoginForm> {
                   final authService =
                       Provider.of<AuthService>(context, listen: false);
                   authService.isloading = true;
+                  FocusScope.of(context).unfocus();
 
                   showDialog(
                       context: context,
@@ -208,7 +209,6 @@ class _LoginFormState extends State<_LoginForm> {
                         loginForm.email, loginForm.password);
 
                     if (!(errorMesage == null)) {
-                      FocusScope.of(context).unfocus();
                       NotificationService.ShowSnackBar(errorMesage);
                       Navigator.pop(context);
                     } else {
