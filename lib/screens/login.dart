@@ -89,7 +89,7 @@ class _LoginForm extends StatefulWidget {
 
 class _LoginFormState extends State<_LoginForm> {
   bool isHidden = true;
-
+  double? value = 1;
   void toggleVisibility() {
     setState(() {
       isHidden = !isHidden;
@@ -191,15 +191,26 @@ class _LoginFormState extends State<_LoginForm> {
                 onPressed: () async {
                   final authService =
                       Provider.of<AuthService>(context, listen: false);
+                  authService.isloading = true;
+
+                  showDialog(
+                      context: context,
+                      builder: (BuildContext context) {
+                        return const Center(
+                          child: CircularProgressIndicator(),
+                        );
+                      });
 
                   if (!loginForm.isValidForm()) {
                     return;
                   } else {
                     final String? errorMesage = await authService.loginUser(
                         loginForm.email, loginForm.password);
+
                     if (!(errorMesage == null)) {
                       FocusScope.of(context).unfocus();
                       NotificationService.ShowSnackBar(errorMesage);
+                      Navigator.pop(context);
                     } else {
                       if (authService.navegar == true) {
                         Navigator.pushReplacementNamed(context, 'home');

@@ -8,6 +8,7 @@ class AuthService extends ChangeNotifier {
   final String apiToken = "";
   final storage = const FlutterSecureStorage();
   bool navegar = false;
+  bool isloading = false;
 
   Future<String?> loginUser(String correo, String password) async {
     final Map<String, dynamic> authData = {
@@ -23,8 +24,11 @@ class AuthService extends ChangeNotifier {
     });
 
     if (response.statusCode == 200) {
+      isloading = false;
       navegar = true;
-    } else {}
+    } else {
+      isloading = false;
+    }
 
     final Map<String, dynamic> decodedResp = json.decode(response.body);
 
