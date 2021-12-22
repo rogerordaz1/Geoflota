@@ -58,24 +58,6 @@ class LoginPageState extends State<LoginPage> {
       ),
     );
   }
-
-  void comprobar(String email, String contrsena) async {
-    var url = Uri.parse('http://152.206.177.70:1337/auth/local');
-    final respuesta = await http
-        .post(url, body: {'identifier': email, 'password': contrsena});
-
-    if (respuesta.statusCode == 200) {
-      Navigator.pushReplacementNamed(
-        context,
-        'home',
-      );
-      //  dispose();
-      print(respuesta.body);
-    } else {
-      emailcontroller.clear();
-      passwordcontroller.clear();
-    }
-  }
 }
 
 class _LoginForm extends StatefulWidget {
@@ -203,7 +185,7 @@ class _LoginFormState extends State<_LoginForm> {
                       });
 
                   if (!loginForm.isValidForm()) {
-                    return;
+                    Navigator.pop(context);
                   } else {
                     final String? errorMesage = await authService.loginUser(
                         loginForm.email, loginForm.password);
