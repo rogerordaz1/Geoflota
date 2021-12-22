@@ -173,7 +173,7 @@ class _LoginFormState extends State<_LoginForm> {
                 onPressed: () async {
                   final authService =
                       Provider.of<AuthService>(context, listen: false);
-                  authService.isloading = true;
+
                   FocusScope.of(context).unfocus();
 
                   showDialog(
@@ -187,16 +187,30 @@ class _LoginFormState extends State<_LoginForm> {
                   if (!loginForm.isValidForm()) {
                     Navigator.pop(context);
                   } else {
-                    final String? errorMesage = await authService.loginUser(
-                        loginForm.email, loginForm.password);
+                    try {
+                      final String? errorMesage = await authService
+                          .loginUser(loginForm.email, loginForm.password)
+                          .timeout(
+                        const Duration(seconds: 10),
+                        onTimeout: () {
+                          Navigator.pop(context);
+                          NotificationService.ShowSnackBar(
+                              "No hay conexion con el API");
+                        },
+                      );
 
-                    if (!(errorMesage == null)) {
-                      NotificationService.ShowSnackBar(errorMesage);
-                      Navigator.pop(context);
-                    } else {
-                      if (authService.navegar == true) {
-                        Navigator.pushReplacementNamed(context, 'home');
+                      if (!(errorMesage == null)) {
+                        NotificationService.ShowSnackBar(errorMesage);
+                        Navigator.pop(context);
+                      } else {
+                        if (authService.navegar == true) {
+                          Navigator.pushReplacementNamed(context, 'home');
+                        }
                       }
+                    } catch (e) {
+                      Navigator.pop(context);
+                      NotificationService.ShowSnackBar(
+                          "Revise su conexion a internet");
                     }
                   }
                 }),

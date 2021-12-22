@@ -8,7 +8,6 @@ class AuthService extends ChangeNotifier {
   final String apiToken = "";
   final storage = const FlutterSecureStorage();
   bool navegar = false;
-  bool isloading = false;
 
   Future<String?> loginUser(String correo, String password) async {
     final Map<String, dynamic> authData = {
@@ -24,10 +23,7 @@ class AuthService extends ChangeNotifier {
     });
 
     if (response.statusCode == 200) {
-      isloading = false;
       navegar = true;
-    } else {
-      isloading = false;
     }
 
     final Map<String, dynamic> decodedResp = json.decode(response.body);
@@ -36,7 +32,7 @@ class AuthService extends ChangeNotifier {
       await storage.write(key: 'token', value: decodedResp['jwt']);
       return null;
     } else {
-      return decodedResp['message'][0]["messages"][0]["message"];
+      return 'Usuario o Contraseña mal escrita.';
     }
 
     //  print(x);
@@ -46,8 +42,7 @@ class AuthService extends ChangeNotifier {
     return await storage.read(key: 'token') ?? '';
   }
 
-  Future logout() async {
+  Future<void> logout() async {
     await storage.delete(key: 'token');
-    return;
   }
 }
