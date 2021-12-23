@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:http/http.dart' as http;
 import 'package:localizacionversion2/providers/login_form_provider.dart';
 import 'package:localizacionversion2/services/auth_service.dart';
 import 'package:localizacionversion2/services/service.dart';
@@ -17,8 +16,6 @@ class LoginPageState extends State<LoginPage> {
   bool isHidden = true;
   bool controlcmail = false;
   bool controlcontrsena = false;
-  final emailcontroller = TextEditingController();
-  final passwordcontroller = TextEditingController();
   bool respuestahttp = false;
 
   @override
