@@ -31,17 +31,20 @@ class _HomePageState extends State<HomePage> {
         mainAxisAlignment: MainAxisAlignment.end,
         children: [
           Container(
-            padding: EdgeInsets.only(
-                bottom: 15, left: MediaQuery.of(context).size.width * 0.45),
+            padding: const EdgeInsets.only(
+              bottom: 15,
+            ),
             child: FloatingActionButton(
               onPressed: () async {
                 var barcodeScanRes = await BarcodeScanner.scan();
                 respuesta = (barcodeScanRes.rawContent);
                 print(respuesta);
+                setState(() {});
               },
               child: const Icon(Icons.qr_code_scanner),
             ),
           ),
+          Center(child: Text('$respuesta'))
         ],
       ),
     );
