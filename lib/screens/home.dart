@@ -18,15 +18,18 @@ class _HomePageState extends State<HomePage> {
     //  final productoService = Provider.of(context);
     final authService = Provider.of<AuthService>(context, listen: false);
     return Scaffold(
-      appBar: AppBar(
-        leading: IconButton(
-          icon: const Icon(Icons.login_outlined),
-          onPressed: () {
-            authService.logout();
-            Navigator.pushReplacementNamed(context, 'login');
-          },
+      appBar: AppBar(actions: [
+        Padding(
+          padding: const EdgeInsets.only(right: 10),
+          child: IconButton(
+            icon: const Icon(Icons.login_outlined),
+            onPressed: () {
+              authService.logout();
+              Navigator.pushReplacementNamed(context, 'login');
+            },
+          ),
         ),
-      ),
+      ]),
       body: Column(
         mainAxisAlignment: MainAxisAlignment.end,
         children: [
