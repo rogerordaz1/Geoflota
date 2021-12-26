@@ -34,8 +34,8 @@ class _HomePageState extends State<HomePage> {
         mainAxisAlignment: MainAxisAlignment.end,
         children: [
           Container(
-            padding:
-                EdgeInsets.only(left: MediaQuery.of(context).size.width * 0.45),
+            padding: EdgeInsets.only(
+                bottom: 15, left: MediaQuery.of(context).size.width * 0.45),
             child: FloatingActionButton(
               onPressed: () async {
                 var barcodeScanRes = await BarcodeScanner.scan();
