@@ -1,3 +1,4 @@
+import 'package:barcode_scan2/platform_wrapper.dart';
 import 'package:flutter/material.dart';
 import 'package:localizacionversion2/services/auth_service.dart';
 import 'package:provider/provider.dart';
@@ -10,6 +11,7 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
+  String respuesta = '';
   @override
   @override
   Widget build(BuildContext context) {
@@ -25,7 +27,23 @@ class _HomePageState extends State<HomePage> {
           },
         ),
       ),
-      body: const Text('jajajaja'),
+      body: Column(
+        mainAxisAlignment: MainAxisAlignment.end,
+        children: [
+          Container(
+            padding:
+                EdgeInsets.only(left: MediaQuery.of(context).size.width * 0.45),
+            child: FloatingActionButton(
+              onPressed: () async {
+                var barcodeScanRes = await BarcodeScanner.scan();
+                respuesta = (barcodeScanRes.rawContent);
+                print(respuesta);
+              },
+              child: const Icon(Icons.qr_code_scanner),
+            ),
+          ),
+        ],
+      ),
     );
   }
 }
